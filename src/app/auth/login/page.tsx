@@ -14,7 +14,7 @@ export default function LoginPage() {
     setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) alert(error.message)
-    else router.push('/gioca')
+    else router.push('/game/gioca')
     setLoading(false)
   }
 

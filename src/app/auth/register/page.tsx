@@ -26,7 +26,7 @@ export default function RegisterPage() {
     if (error) alert(error.message)
     else {
       alert('Registrazione completata! Controlla la tua email per confermare.')
-      router.push('/login')
+      router.push('/auth/login')
     }
     setLoading(false)
   }
