@@ -18,4 +18,4 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
         delete: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }),
       }),
       rpc: async () => ({ error: { message: 'Missing Supabase Env Vars' } })
-    } as any
+    } as any;
