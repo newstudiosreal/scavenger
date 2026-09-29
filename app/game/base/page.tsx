@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '../../lib/supabase'
 import { useRouter } from 'next/navigation'
 import { Coins, Home, ShoppingCart, ArrowLeft, Package } from 'lucide-react'
-import { ListOnMarketModal } from '@/components/game/ListOnMarketModal'
+import { ListOnMarketModal } from '../../components/game/ListOnMarketModal'
 
 export default function BasePage() {
   const [profile, setProfile] = useState<any>(null)

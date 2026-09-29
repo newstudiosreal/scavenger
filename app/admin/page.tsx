@@ -44,7 +44,7 @@ export default function AdminPage() {
         </button>
         <div className="bg-red-600 px-3 py-1 rounded text-xs font-bold uppercase tracking-wider">SuperAdmin Panel</div>
       </div>
-      <h1 className="text-4xl font-black mb-8">PANNELLO DI CONTROLLO</h1>
+      <h1 className="text-4xl font-black mb-8">PANNELLO di CONTROLLO</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl"><Users className="text-blue-400 mb-2" /><p className="text-slate-400 text-sm">Giocatori Totali</p><p className="text-3xl font-bold">{stats?.playerCount}</p></div>
         <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl"><Database className="text-yellow-400 mb-2" /><p className="text-slate-400 text-sm">Coin in Circolazione</p><p className="text-3xl font-bold">{stats?.totalCoins}</p></div>
