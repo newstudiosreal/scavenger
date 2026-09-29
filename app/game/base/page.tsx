@@ -1,9 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { supabase } from '../../lib/supabase'
+import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import { Coins, Home, ShoppingCart, ArrowLeft, Package } from 'lucide-react'
-import { ListOnMarketModal } from '../../components/game/ListOnMarketModal'
+import { ListOnMarketModal } from '@/components/game/ListOnMarketModal'
 
 export default function BasePage() {
   const [profile, setProfile] = useState<any>(null)
@@ -53,7 +53,7 @@ export default function BasePage() {
       headers: { 'Content-Type': 'application/json' }
     })
     if (res.ok) {
-      const { data: inv } = await supabase.from('inventory').select('*, items(name, emoji_or_icon, base_//price').eq('profile_id', user?.id).eq('location', 'zaino')
+      const { data: inv } = await supabase.from('inventory').select('*, items(name, emoji_or_icon, base_price)').eq('profile_id', user?.id).eq('location', 'zaino')
       setInventory(inv || [])
     }
     setLoading(false)
