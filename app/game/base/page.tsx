@@ -16,7 +16,7 @@ export default function BasePage() {
     async function loadData() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
-        router.push('/login')
+        router.push('/auth/login')
         return
       }
 
@@ -71,7 +71,7 @@ export default function BasePage() {
   return (
     <div className="min-h-screen p-6 bg-slate-900 text-white">
       <div className="flex justify-between items-center mb-8">
-        <button onClick={() => router.push('/gioca')} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+        <button onClick={() => router.push('/game/gioca')} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" /> Torna a esplorare
         </button>
         <div className="flex items-center gap-2 bg-slate-800 px-4 py-2 rounded-full border border-yellow-500/50">
@@ -138,7 +138,7 @@ export default function BasePage() {
           <h2 className="text-xl font-bold mb-2">Mercato tra Giocatori</h2>
           <p className="text-slate-400 mb-6">Vendi i tuoi oggetti rari ad altri esploratori per guadagnare di più!</p>
           <button
-            onClick={() => router.push('/mercato')}
+            onClick={() => router.push('/game/mercato')}
             className="px-6 py-3 bg-green-600 hover:bg-green-500 rounded-xl font-bold transition-all"
           >
             Vai al Mercato

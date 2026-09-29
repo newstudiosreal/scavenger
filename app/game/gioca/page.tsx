@@ -15,7 +15,7 @@ export default function GiocaPage() {
     async function loadProfile() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) {
-        router.push('/login')
+        router.push('/auth/login')
         return
       }
       const { data } = await supabase.from('profiles').select('energy').eq('id', user.id).single()
