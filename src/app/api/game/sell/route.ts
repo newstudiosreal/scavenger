@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     let finalPrice = itemData.base_price
     if (recentTxs && recentTxs.length > 0) {
-      const avg = recentTxs.reduce((acc, curr) => acc + curr.price, 0) / recentTxs.length
+      const avg = recentTxs.reduce((acc: number, curr: any) => acc + curr.price, 0) / recentTxs.length
       finalPrice = Math.round(avg)
     }
 

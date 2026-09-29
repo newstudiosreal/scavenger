@@ -29,8 +29,8 @@ export default function AdminPage() {
       const { data: allPlayers } = await supabase.from('profiles').select('*')
       const { data: allTxs } = await supabase.from('transactions').select('price')
 
-      const totalCoins = allPlayers?.reduce((acc, p) => acc + p.coins, 0) || 0
-      const totalVolume = allTxs?.reduce((acc, t) => acc + t.price, 0) || 0
+      const totalCoins = allPlayers?.reduce((acc: number, p: any) => acc + p.coins, 0) || 0
+      const totalVolume = allTxs?.reduce((acc: number, t: any) => acc + t.price, 0) || 0
 
       setPlayers(allPlayers || [])
       setStats({ totalCoins, totalVolume, playerCount: allPlayers?.length || 0 })
