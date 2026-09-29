@@ -7,15 +7,16 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
   ? createClient(supabaseUrl, supabaseAnonKey)
   : {
       auth: {
-        getUser: async () => ({ data: { user: null }, error: { message: 'Missing Supabase Env Vars' } }),
-        signInWithPassword: async () => ({ error: { message: 'Missing Supabase Env Vars' } }),
-        signUp: async () => ({ error: { message: 'Missing Supabase Env Vars' } }),
+        getUser: async () => ({ data: { user: null }, error: { message: 'Missing Env Vars' } }),
+        signInWithPassword: async () => ({ error: { message: 'Missing Env Vars' } }),
+        signUp: async () => ({ error: { message: 'Missing Env Vars' } }),
       },
       from: () => ({
-        select: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }) }),
-        insert: () => ({ select: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }),
-        update: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }),
-        delete: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }),
+        select: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Env Vars' } }) }) }) }),
+        insert: () => ({ select: () => ({ single: async () => ({ data: null, error: { message: 'Missing Env Vars' } }) }) }),
+        update: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Env Vars' } }) }) }),
+        delete: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Env Vars' } }) }),
       }),
-      rpc: async () => ({ error: { message: 'Missing Supabase Env Vars' } })
-    } as any;
+      rpc: async () => ({ error: { message: 'Missing Env Vars' } }),
+    } as any
+}

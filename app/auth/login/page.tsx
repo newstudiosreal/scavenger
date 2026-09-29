@@ -25,7 +25,7 @@ export default function LoginPage() {
         <form onSubmit={handleLogin} className="space-y-4">
           <input type="email" placeholder="Email" className="w-full p-3 rounded bg-slate-700 border border-slate-600" value={email} onChange={e => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" className="w-full p-3 rounded bg-slate-700 border border-slate-600" value={password} onChange={e => setPassword(e.target.value)} required />
-          <button type="submit" disabled={loading} className="w-full p-3 bg-green-600 rounded-lg font-bold"> {loading ? '...' : 'Entra'} </button>
+          <button type="submit" disabled={loading} className="w-full p-3 bg-green-600 rounded-lg font-bold">{loading ? '...' : 'Entra'}</button>
         </form>
         <p className="mt-4 text-center text-sm">Non hai un account? <a href="/auth/register" className="text-green-400">Registrati</a></p>
       </div>

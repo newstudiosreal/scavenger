@@ -1,14 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '../../lib/supabase'
+import { NextResponse } from 'next/server'
+import { supabase } from '@/lib/supabase'
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
-    const { userId, itemId } = await req.json()
-    const { data: itemInv, error: invError } = await supabase.from('inventory').select('id, quantity').eq('profile_id', userId).eq('item_id', itemId).eq('location', 'zaino').single()
-    if (invError || !itemInv) return NextResponse.json({ error: 'Oggetto non trovato nello zaino' }, { status: 400 })
-    await supabase.from('inventory').update({ location: 'collezione' }).eq('id', itemInv.id)
+    const { userId, item } = await req.json()
+    if (!userId || !item) return NextResponse.json({ error: 'Missing data' }, { status: 400 })
+
+    const { error } = await supabase
+      .from('inventory')
+      .insert({
+        user_id: userId,
+        item_name: item.name,
+        emoji: item.emoji,
+        rarity: item.rarity,
+        base_value: item.value
+      })
+
+    if (error) throw error
     return NextResponse.json({ success: true })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 })
   }
 }

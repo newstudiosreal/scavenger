@@ -1,16 +1,36 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '../../lib/supabase'
+import { NextResponse } from 'next/server'
+import { supabase } from '@/lib/supabase'
 
-export async function POST(req: NextRequest) {
+export async function POST(req: Request) {
   try {
     const { userId, itemId, price } = await req.json()
-    const { data: itemInv, error: invError } = await supabase.from('inventory').select('id').eq('profile_id', userId).eq('item_id', itemId).eq('location', 'zaino').single()
-    if (invError || !itemInv) return NextResponse.json({ error: 'Oggetto non trovato nello zaino' }, { status: 400 })
-    const { error: listError } = await supabase.from('market_listings').insert({ seller_id: userId, item_id: itemId, price: price, status: 'attivo' })
+    if (!userId || !itemId || !price) return NextResponse.json({ error: 'Missing data' }, { status: 400 })
+
+    const { data: item, error: itemError } = await supabase
+      .from('inventory')
+      .select('*')
+      .eq('id', itemId)
+      .single()
+
+    if (itemError || !item) return NextResponse.json({ error: 'Item not found' }, { status: 404 })
+
+    const { error: listError } = await supabase
+      .from('market_listings')
+      .insert({
+        seller_id: userId,
+        item_name: item.item_name,
+        emoji: item.emoji,
+        rarity: item.rarity,
+        base_value: item.base_value,
+        price: price
+      })
     if (listError) throw listError
-    await supabase.from('inventory').delete().eq('id', itemInv.id)
+
+    const { error: delError } = await supabase.from('inventory').delete().eq('id', itemId)
+    if (delError) throw delError
+
     return NextResponse.json({ success: true })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.//message }, { status: 500 })
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 })
   }
 }
