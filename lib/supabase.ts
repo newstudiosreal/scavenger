@@ -3,8 +3,6 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
-// We use a conditional check to prevent the build from crashing on Vercel
-// when environment variables are not yet injected during static analysis.
 export const supabase = (supabaseUrl && supabaseAnonKey)
   ? createClient(supabaseUrl, supabaseAnonKey)
   : {
@@ -17,7 +15,7 @@ export const supabase = (supabaseUrl && supabaseAnonKey)
         select: () => ({ select: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }) }),
         insert: () => ({ select: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }),
         update: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }),
-        delete: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }) }),
+        delete: () => ({ eq: () => ({ single: async () => ({ data: null, error: { message: 'Missing Supabase Env Vars' } }) }),
       }),
       rpc: async () => ({ error: { message: 'Missing Supabase Env Vars' } })
     } as any;
